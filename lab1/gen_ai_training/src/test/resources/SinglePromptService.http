@@ -1,0 +1,9 @@
+### Request param: {"input": "I want to find top-10 books about world history"}
+
+GET http://localhost:8080/chat/simple
+    ?input=I%20want%20to%20find%20top-10%20books%20about%20world%20history
+Accept: application/json
+
+###
+@request = Create 'Hello, World!' program in Java.
+GET {{host}}/chat/simple?input={{request}}
