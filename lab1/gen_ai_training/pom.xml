@@ -8,16 +8,54 @@
         <version>3.3.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.epam.training.gen.ai</groupId>
     <artifactId>gen_ai_training</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>gen_ai_training</name>
 
+    <name>
+        gen_ai_training_lab1
+    </name>
     <description>
-        This is a training project for the GenAI Foundations for Java Developers course.
-        The project uses Spring Boot and Semantic Kernel to explore Generative AI and Large Language Models.
+        This is the first lab project for the GenAI Foundations for Java Developers course.
+        The lab uses Spring Boot and Semantic Kernel to explore Generative AI and Large Language Models.
         It includes the implementation of a basic application that uses Semantic Kernel to generate text.
     </description>
+    <url>
+        https://github.com/rabestro/epam-gen-ai-bootcamp-coursework
+    </url>
+    <inceptionYear>
+        2024
+    </inceptionYear>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>EPAM Systems</name>
+        <url>https://www.epam.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>rabestro</id>
+            <name>Jegors Čemisovs</name>
+            <email>jegors_cemisovs@epam.com</email>
+            <url>https://www.linkedin.com/in/jegors-cemisovs</url>
+            <timezone>Europe/Riga</timezone>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/rabestro/epam-gen-ai-bootcamp-coursework/issues</url>
+    </issueManagement>
 
     <properties>
         <java.version>21</java.version>
@@ -78,10 +116,10 @@
             <artifactId>semantickernel-core</artifactId>
             <version>${semantic-kernel.version}</version>
         </dependency>
-		<dependency>
-			<groupId>com.azure</groupId>
-			<artifactId>azure-ai-openai</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-ai-openai</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.microsoft.semantic-kernel</groupId>
             <artifactId>semantickernel-api</artifactId>
