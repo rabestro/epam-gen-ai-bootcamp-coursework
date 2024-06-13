@@ -24,42 +24,40 @@ public class SemanticKernelService {
     private final ObjectMapper objectMapper;
 
     public ChatResponse getKernelResponseUsingSimplePrompt(ChatKernelRequest chatKernelRequest) {
-        String userInput = chatKernelRequest.input();
-        String result = Objects.requireNonNull(Objects.requireNonNull(kernel.invokePromptAsync(userInput).block()).getResult()).toString();
+        var userInput = chatKernelRequest.input();
+        var result = Objects.requireNonNull(Objects.requireNonNull(kernel.invokePromptAsync(userInput).block()).getResult()).toString();
         log.info("Received result: {}", result);
         return new ChatResponse(List.of(result));
     }
 
     public ChatBookResponse getKernelJsonResponse(ChatKernelRequest chatKernelRequest) {
-        String userInput = chatKernelRequest.input();
-        String result = Objects.requireNonNull(Objects.requireNonNull(kernel.invokePromptAsync(getJsonPrompt(userInput)).block()).getResult()).toString();
+        var userInput = chatKernelRequest.input();
+        var result = Objects.requireNonNull(Objects.requireNonNull(kernel.invokePromptAsync(getJsonPrompt(userInput)).block()).getResult()).toString();
 
         log.info("Received result: {}", result);
-        List<BookDto> jsonResult = mapJsonToBooks(result).response();
+        var jsonResult = mapJsonToBooks(result).response();
         log.info("Mapped result: {}", jsonResult);
         return mapJsonToBooks(result);
     }
 
     private String getJsonPrompt(String input) {
         return """
-                            ## Instructions
-                            Provide the response using the following format:
-                            [
-                                {
-                                    "author": "author1",
-                                    "title": "title1"
-                                },
-                                {
-                                    "author": "author2",
-                                    "title": "title2"
-                                }
-                            ]
-                            ```
-                            ## User Input
-                            The user input is: "%s"
-                            }
-                            ```
-                                }
+                ## Instructions
+                Provide the response using the following format:
+                [
+                    {
+                        "author": "author1",
+                        "title": "title1"
+                    },
+                    {
+                        "author": "author2",
+                        "title": "title2"
+                    }
+                ]
+                ```
+                ## User Input
+                The user input is: "%s"
+                ```
                 """.formatted(input);
     }
 

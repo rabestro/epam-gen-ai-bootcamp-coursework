@@ -88,8 +88,8 @@ public class FunctionMessagePromptService {
     }
 
     private String validateResponse(String content, String originalRequest) {
-        boolean hasTenItems = (content.split("\\n").length == 10);
-        boolean aiValidation = requestAIValidation(content, originalRequest);
+        var hasTenItems = (content.split("\\n").length == 10);
+        var aiValidation = requestAIValidation(content, originalRequest);
 
         log.info("AI validation. Is valid: {}", aiValidation);
         log.info("Item number validation. Is valid: {}", hasTenItems);
@@ -116,7 +116,7 @@ public class FunctionMessagePromptService {
                                 ))
                 )
                 .block();
-        var answer = completions.getChoices().get(0).getMessage().getContent();
+        var answer = completions.getChoices().getFirst().getMessage().getContent();
         log.info("AI validation response: {}", answer);
         return answer.contains("Yes");
     }
