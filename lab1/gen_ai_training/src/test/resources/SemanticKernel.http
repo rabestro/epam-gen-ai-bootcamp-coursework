@@ -1,0 +1,17 @@
+### Get kernel response using simple prompt
+POST {{host}}/kernel/simple
+Accept: application/json
+Content-Type: application/json
+
+{
+  "input": "I want to find top-10 books about world history"
+}
+
+### Get kernel JSON response
+POST {{host}}/kernel/json
+Accept: application/json
+Content-Type: application/json
+
+{
+  "input": "I want to find top-10 books about world history"
+}
