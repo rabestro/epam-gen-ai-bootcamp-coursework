@@ -1,4 +1,9 @@
 package com.epam.training.gen.ai.dto;
 
-public record BookDto(String title, String author) {
+import lombok.Data;
+
+@Data
+public class BookDto {
+    private String title;
+    private String author;
 }

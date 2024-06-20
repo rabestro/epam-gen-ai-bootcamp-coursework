@@ -47,6 +47,11 @@ public class OpenAIConfig {
     }
 
     @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
     public PromptExecutionSettings promptExecutionSettings() {
         return PromptExecutionSettings.builder()
                 .withMaxTokens(1_000)
@@ -57,10 +62,5 @@ public class OpenAIConfig {
     @Bean
     public ChatHistory chatHistory() {
         return new ChatHistory();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
     }
 }
