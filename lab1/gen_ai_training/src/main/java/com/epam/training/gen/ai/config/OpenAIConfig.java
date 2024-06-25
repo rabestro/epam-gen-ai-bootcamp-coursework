@@ -5,7 +5,9 @@ import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.core.credential.AzureKeyCredential;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.semantickernel.Kernel;
+import com.microsoft.semantickernel.orchestration.PromptExecutionSettings;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
+import com.microsoft.semantickernel.services.chatcompletion.ChatHistory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,5 +49,18 @@ public class OpenAIConfig {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
+    }
+
+    @Bean
+    public PromptExecutionSettings promptExecutionSettings() {
+        return PromptExecutionSettings.builder()
+                .withMaxTokens(1_000)
+                .withTemperature(0.0)
+                .build();
+    }
+
+    @Bean
+    public ChatHistory chatHistory() {
+        return new ChatHistory();
     }
 }
