@@ -1,0 +1,25 @@
+meta {
+  name: Claude
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/generate-json
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "prompt": "I want to find top-3 books about world history",
+    "max_tokens": 1000,
+    "temperature": 0.00,
+    "model": "anthropic.claude-v3-opus"
+  }
+}
