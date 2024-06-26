@@ -1,0 +1,29 @@
+meta {
+  name: Null Prompt
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/api/generate-text
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/text;charset=UTF-8
+}
+
+body:json {
+  {
+    "max_tokens": 1000,
+    "temperature": 0.00,
+    "model": "unknown"
+  }
+}
+
+assert {
+  res.body: contains OpenAI
+  res.status: eq 200
+}
