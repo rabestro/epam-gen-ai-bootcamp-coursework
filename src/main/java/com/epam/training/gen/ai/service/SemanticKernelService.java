@@ -26,23 +26,23 @@ public class SemanticKernelService {
     private final ObjectMapper objectMapper;
 
     public String getResponseWithSettings(ChatRequest chatRequest) {
-        Kernel kernel = buildKernel(chatRequest.getDeploymentName());
-        FunctionResult<Object> response = invokePrompt(kernel, chatRequest.getInput(), createPromptExecutionSettings(chatRequest));
-        String result = processResponse(response);
+        var kernel = buildKernel(chatRequest.getDeploymentName());
+        var response = invokePrompt(kernel, chatRequest.getInput(), createPromptExecutionSettings(chatRequest));
+        var result = processResponse(response);
         logTokenUsage(response);
         return result;
     }
 
     public ChatBookResponse getJsonResponseWithSettings(ChatRequest chatRequest) {
-        Kernel kernel = buildKernel(chatRequest.getDeploymentName());
-        FunctionResult<Object> response = invokePrompt(kernel, createJsonPrompt(chatRequest.getInput()), createPromptExecutionSettings(chatRequest));
-        String result = processResponse(response);
+        var kernel = buildKernel(chatRequest.getDeploymentName());
+        var response = invokePrompt(kernel, createJsonPrompt(chatRequest.getInput()), createPromptExecutionSettings(chatRequest));
+        var result = processResponse(response);
         logTokenUsage(response);
         return getChatBookResponse(result);
     }
 
     private Kernel buildKernel(String deploymentName) {
-        ChatCompletionService chatCompletionService = chatCompletionServiceBuilder
+        var chatCompletionService = chatCompletionServiceBuilder
                 .withModelId(deploymentName)
                 .withDeploymentName(deploymentName)
                 .build();
@@ -58,7 +58,7 @@ public class SemanticKernelService {
     }
 
     private String processResponse(FunctionResult<Object> response) {
-        String result = Objects.requireNonNull(response.getResult()).toString();
+        var result = Objects.requireNonNull(response.getResult()).toString();
         log.info("Received result: {}", result);
         return result;
     }
@@ -101,9 +101,9 @@ public class SemanticKernelService {
 
     private ChatBookResponse getChatBookResponse(String result) {
         try {
-            List<BookDto> jsonResult = mapJsonToBooks(result).getResponse();
+            var jsonResult = mapJsonToBooks(result).getResponse();
             log.info("Mapped result: {}", jsonResult);
-            ChatBookResponse chatBookResponse = mapJsonToBooks(result);
+            var chatBookResponse = mapJsonToBooks(result);
             log.info("Exiting getJsonResponseWithSettings with response: {}", chatBookResponse);
             return chatBookResponse;
         } catch (Exception e) {

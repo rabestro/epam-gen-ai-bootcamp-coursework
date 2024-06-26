@@ -3,6 +3,7 @@ package com.epam.training.gen.ai.controller;
 import com.epam.training.gen.ai.dto.ChatBookResponse;
 import com.epam.training.gen.ai.dto.ChatRequest;
 import com.epam.training.gen.ai.service.SemanticKernelService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +19,14 @@ public class ChatController {
     private final SemanticKernelService semanticKernelService;
 
     @PostMapping("/generate-text")
-    public ResponseEntity<String> getResponseWithSettings(@RequestBody ChatRequest chatRequest) {
-        String response = semanticKernelService.getResponseWithSettings(chatRequest);
+    public ResponseEntity<String> getResponseWithSettings(@Valid @RequestBody ChatRequest chatRequest) {
+        var response = semanticKernelService.getResponseWithSettings(chatRequest);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/generate-json")
-    public ResponseEntity<ChatBookResponse> getJsonResponseWithSettings(@RequestBody ChatRequest chatRequest) {
-        ChatBookResponse response = semanticKernelService.getJsonResponseWithSettings(chatRequest);
+    public ResponseEntity<ChatBookResponse> getJsonResponseWithSettings(@Valid @RequestBody ChatRequest chatRequest) {
+        var response = semanticKernelService.getJsonResponseWithSettings(chatRequest);
         return ResponseEntity.ok(response);
     }
 }
