@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +24,8 @@ public class ModelService {
             throw new OpenAiException("Failed to get model list");
         }
 
-        return Objects.requireNonNull(response)
-                .getData().stream()
+        return response.getData()
+                .stream()
                 .map(Deployment::getModel)
                 .toList();
     }

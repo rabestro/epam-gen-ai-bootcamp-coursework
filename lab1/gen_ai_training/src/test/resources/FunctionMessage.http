@@ -1,7 +1,0 @@
-@request = I want to find top-10 books about world history
-
-### Use function message with default settings
-GET {{host}}/chat/function-message?input={{request}}
-
-### Use function message with changed settings
-GET {{host}}/chat/function-message-changed?input={{request}}
