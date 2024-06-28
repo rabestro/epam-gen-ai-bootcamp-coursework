@@ -1,0 +1,2 @@
+### GET all available models
+GET {{host}}/api/models

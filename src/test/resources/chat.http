@@ -1,0 +1,10 @@
+### Get text response with settings
+POST {{host}}/api/generate-text
+Content-Type: application/json;charset=UTF-8
+
+{
+  "prompt": "Generate Hello World program in Java",
+  "max_tokens": 1000,
+  "temperature": 0.00,
+  "model": "gpt-35-turbo"
+}

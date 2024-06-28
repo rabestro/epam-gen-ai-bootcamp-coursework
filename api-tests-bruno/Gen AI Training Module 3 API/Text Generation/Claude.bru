@@ -1,0 +1,32 @@
+meta {
+  name: Claude
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/generate-text
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "prompt": "Who are you? What is your last knowledge update? What date is it today?",
+    "max_tokens": 1000,
+    "temperature": 0.00,
+    "model": "anthropic.claude-v3-opus"
+  }
+}
+
+assert {
+  res.body: isString 
+  res.body: contains Claude
+  res.body: contains Anthropic
+  res.body: matches knowledge.*2021
+}
