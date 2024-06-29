@@ -21,7 +21,7 @@ The primary objective of this course is to provide hands-on experience in creati
 
 ## How to Run
 
-Provide instructions on how to run your projects.
+TODO: Provide instructions on how to run your projects.
 
 ## License
 
