@@ -1,6 +1,6 @@
 ### Calculate age from date
 
-POST {{host}}/age
+POST {{host}}/api/age
 Content-Type: application/json;charset=UTF-8
 
 {
