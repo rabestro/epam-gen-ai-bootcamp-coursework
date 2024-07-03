@@ -1,0 +1,24 @@
+@query = Europe
+
+### Get Wikipedia URL
+
+POST {{host}}/api/wiki
+Content-Type: application/json;charset=UTF-8
+
+{
+  "prompt": "Query: {{query}}"
+}
+
+?? status == 200
+?? header content-type includes json
+?? body length >= 5
+?? body at(0) startsWith system:
+?? body at(1) startsWith user:
+?? body at(1) includes {{query}}
+?? body at(2) equals assistant: null
+?? body at(3) startsWith tool: 
+?? body at(3) includes https://wikipedia.org/w/index.php?search=
+?? body at(3) includes {{query}}
+?? body at(4) startsWith assistant: Here is the URL for the Wikipedia search of
+?? body at(4) includes {{query}}
+?? body at(4) includes https://wikipedia.org/w/index.php?search=

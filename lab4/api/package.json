@@ -4,8 +4,8 @@
   "description": "Module 4. Project Organization",
   "main": "index.js",
   "scripts": {
-    "test": "httpyac './**/*.http' --all --env local --output short",
-    "api-test": "httpyac ./**/*.http --all --env local --no-color --junit > report.xml"
+    "test": "httpyac './tests/**/*.http' --all --env local --output short",
+    "api-test": "httpyac ./tests/**/*.http --all --env local --no-color --junit > report.xml"
   },
   "keywords": [
     "httpyac",
@@ -15,7 +15,6 @@
   "author": "Jegors Čemisovs. <jegors_cemisovs@epam.com>",
   "license": "MIT",
   "dependencies": {
-    "httpyac": "^6.13.1",
-    "node-fetch": "3.2.10"
+    "httpyac": "^6.13.1"
   }
 }
