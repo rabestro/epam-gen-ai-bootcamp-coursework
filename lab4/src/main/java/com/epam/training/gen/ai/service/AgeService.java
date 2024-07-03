@@ -1,16 +1,13 @@
-package com.epam.training.gen.ai.semantic;
+package com.epam.training.gen.ai.service;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
+import com.epam.training.gen.ai.semantic.SemanticKernelBasicService;
 import com.epam.training.gen.ai.semantic.plugin.AgeCalculatorPlugin;
 import com.microsoft.semantickernel.services.ServiceNotFoundException;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class AgeService extends SemanticKernelBasicService {
 
     public AgeService(OpenAIAsyncClient client,
@@ -25,7 +22,10 @@ public class AgeService extends SemanticKernelBasicService {
 
     @Override
     protected String getSystemPrompt() {
-        return "You will be provided with a date. Convert year, month and day into an integer."
-            + " Your task is to calculate the age";
+        return """
+                You will be provided with a date.
+                Convert year, month and day into an integer.
+                Your task is to calculate the age
+                """;
     }
 }

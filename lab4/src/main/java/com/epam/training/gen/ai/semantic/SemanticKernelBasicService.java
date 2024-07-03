@@ -9,7 +9,6 @@ import com.microsoft.semantickernel.orchestration.FunctionResultMetadata;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
 import com.microsoft.semantickernel.orchestration.InvocationReturnMode;
 import com.microsoft.semantickernel.orchestration.ToolCallBehavior;
-import com.microsoft.semantickernel.plugin.KernelPlugin;
 import com.microsoft.semantickernel.plugin.KernelPluginFactory;
 import com.microsoft.semantickernel.services.ServiceNotFoundException;
 import com.microsoft.semantickernel.services.chatcompletion.AuthorRole;
@@ -25,18 +24,17 @@ import java.util.Optional;
 
 @Slf4j
 public abstract class SemanticKernelBasicService {
-
     private final Kernel kernel;
     private final ChatCompletionService chatCompletionService;
     private ChatHistory chatHistory = new ChatHistory(getSystemPrompt() + " Use 'custom_plugin' to complete the task."
                                                       + "Include the result of the function call into your response.");
 
     public SemanticKernelBasicService(OpenAIAsyncClient client, String modelId) throws ServiceNotFoundException {
-        ChatCompletionService openAIChatCompletion = ChatCompletionService.builder()
+        var openAIChatCompletion = ChatCompletionService.builder()
                 .withOpenAIAsyncClient(client)
                 .withModelId(modelId)
                 .build();
-        KernelPlugin plugin = KernelPluginFactory.createFromObject(getPlugin(), "custom_plugin");
+        var plugin = KernelPluginFactory.createFromObject(getPlugin(), "custom_plugin");
         kernel = Kernel.builder()
                 .withAIService(ChatCompletionService.class, openAIChatCompletion)
                 .withPlugin(plugin)
@@ -58,6 +56,7 @@ public abstract class SemanticKernelBasicService {
         }
         chatHistory = new ChatHistory(assistantResponse);
         Optional<ChatMessageContent<?>> lastMessage = chatHistory.getLastMessage();
+
         if (lastMessage.isPresent()) {
             handleToolCalls(lastMessage.get());
         } else {
