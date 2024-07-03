@@ -1,0 +1,7 @@
+### Calculate age from date
+POST {{host}}/age
+Content-Type: application/json;charset=UTF-8
+
+{
+  "prompt": "The date is 7 June 1970"
+}
