@@ -15,14 +15,14 @@ public class AgeCalculatorPlugin {
             @KernelFunctionParameter(name = "year", description = "Year of birth") String birthYear,
             @KernelFunctionParameter(name = "month", description = "Month of birth") String birthMonth,
             @KernelFunctionParameter(name = "day", description = "Day of birth") String birthDay) {
-        LocalDate currentDate = LocalDate.now();
-        LocalDate birthDate = LocalDate.of(Integer.parseInt(birthYear),
+        var currentDate = LocalDate.now();
+        var birthDate = LocalDate.of(Integer.parseInt(birthYear),
                 Integer.parseInt(birthMonth),
                 Integer.parseInt(birthDay));
-        Period period = Period.between(birthDate, currentDate);
-        int years = period.getYears();
-        int months = period.getMonths();
-        int days = period.getDays();
+        var period = Period.between(birthDate, currentDate);
+        var years = period.getYears();
+        var months = period.getMonths();
+        var days = period.getDays();
         return String.format(AGE_TEMPLATE, years, months, days);
     }
 }
