@@ -1,7 +1,7 @@
 package com.epam.training.gen.ai.controller;
 
 import com.epam.training.gen.ai.dto.PromptRequest;
-import com.epam.training.gen.ai.service.WikiUrlService;
+import com.epam.training.gen.ai.service.BingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,16 +13,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class WiKiController {
-    private final WikiUrlService wikiUrlService;
+public class BingController {
+    private final BingService bingService;
 
     @Autowired
-    public WiKiController(WikiUrlService wikiUrlService) {
-        this.wikiUrlService = wikiUrlService;
+    public BingController(BingService bingService) {
+        this.bingService = bingService;
     }
 
-    @PostMapping(path = "/wiki")
-    public @ResponseBody List<String> getWikiUrl(@RequestBody PromptRequest request) {
-        return wikiUrlService.getChatCompletions(request.prompt());
+    @PostMapping(path = "/bing")
+    public @ResponseBody List<String> getBingUrl(@RequestBody PromptRequest request) {
+        return bingService.getChatCompletions(request.prompt());
     }
 }
