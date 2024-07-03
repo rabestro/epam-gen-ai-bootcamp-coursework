@@ -1,0 +1,23 @@
+@birthday = 1978-07-28
+
+### Calculate age from date
+
+POST {{host}}/api/age
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "prompt": "The date is {{birthday}}"
+}
+
+?? status == 200
+?? header content-type includes json
+?? body length >= 5
+?? body at(0) startsWith system:
+?? body at(1) startsWith user:
+?? body at(1) includes {{birthday}}
+?? body at(2) equals assistant: null
+?? body at(3) startsWith tool: Your age is: 
+?? body at(3) includes years
+?? body at(3) includes months
+?? body at(3) includes day

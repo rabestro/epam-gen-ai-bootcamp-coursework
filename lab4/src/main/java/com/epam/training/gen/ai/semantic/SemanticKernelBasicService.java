@@ -1,6 +1,7 @@
 package com.epam.training.gen.ai.semantic;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
+import com.epam.training.gen.ai.service.AiService;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatMessageContent;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIFunctionToolCall;
@@ -23,7 +24,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
-public abstract class SemanticKernelBasicService {
+public abstract class SemanticKernelBasicService implements AiService {
     private final Kernel kernel;
     private final ChatCompletionService chatCompletionService;
     private ChatHistory chatHistory = new ChatHistory(getSystemPrompt() + " Use 'custom_plugin' to complete the task."
@@ -46,6 +47,7 @@ public abstract class SemanticKernelBasicService {
 
     protected abstract String getSystemPrompt();
 
+    @Override
     public List<String> getChatCompletions(String userMessage) {
         chatHistory.addUserMessage(userMessage);
         var assistantResponse = chatCompletionService.getChatMessageContentsAsync(chatHistory, kernel,
