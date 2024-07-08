@@ -13,11 +13,6 @@ import static com.epam.training.gen.ai.semantic.plugin.AgeCalculatorPlugin.AGE_T
 @Service
 public class KernelAgeCalculationService extends AbstractKernelService {
 
-    private static final String PROMPT = """
-            <message role="system">{{system}}</message>
-            <message role="user">{{request}}</message>
-            """;
-
     public KernelAgeCalculationService(OpenAIAsyncClient openAIAsyncClient, OpenAIProperties properties) {
         super(openAIAsyncClient, properties);
     }
@@ -39,7 +34,10 @@ public class KernelAgeCalculationService extends AbstractKernelService {
 
     @Override
     protected String getPrompt() {
-        return PROMPT;
+        return """
+                <message role="system">{{system}}</message>
+                <message role="user">{{request}}</message>
+                """;
     }
 
     @Override

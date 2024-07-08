@@ -2,9 +2,10 @@ package com.epam.training.gen.ai.controller;
 
 import com.epam.training.gen.ai.model.ChatRequest;
 import com.epam.training.gen.ai.model.ChatResponse;
-import com.epam.training.gen.ai.semantic.kernel.KernelAgeCalculationService;
+import com.epam.training.gen.ai.semantic.AiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class AgeController {
-    private final KernelAgeCalculationService ageCalcService;
+    private final AiService aiService;
 
     @Autowired
-    public AgeController(KernelAgeCalculationService ageCalcService) {
-        this.ageCalcService = ageCalcService;
+    public AgeController(@Qualifier("kernelAgeCalculationService") AiService aiService) {
+        this.aiService = aiService;
     }
 
     @PostMapping(path = "/calculate-age")
     public @ResponseBody ResponseEntity<ChatResponse> getAge(@RequestBody @Valid ChatRequest request) {
-        return ageCalcService.getKernelFunctionalResponse(request.query())
+        return aiService.getKernelFunctionalResponse(request.query())
                 .map(ChatResponse::new)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.unprocessableEntity().build());

@@ -2,6 +2,7 @@ package com.epam.training.gen.ai.semantic.kernel;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
 import com.epam.training.gen.ai.config.OpenAIProperties;
+import com.epam.training.gen.ai.semantic.AiService;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
 import com.microsoft.semantickernel.orchestration.FunctionResult;
@@ -16,7 +17,7 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 @AllArgsConstructor
-public abstract class AbstractKernelService {
+public abstract class AbstractKernelService implements AiService {
     private static final double TEMPERATURE = 0.2;
     private final OpenAIAsyncClient openAIAsyncClient;
     private final OpenAIProperties properties;
@@ -31,6 +32,7 @@ public abstract class AbstractKernelService {
 
     protected abstract String getTemplate();
 
+    @Override
     public Optional<String> getKernelFunctionalResponse(String message) {
         var chatCompletionService = OpenAIChatCompletion.builder()
                 .withModelId(properties.deploymentName())
