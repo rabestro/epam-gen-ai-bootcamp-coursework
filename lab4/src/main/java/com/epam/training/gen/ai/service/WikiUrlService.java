@@ -12,7 +12,7 @@ public class WikiUrlService extends SemanticKernelBasicService {
 
     public WikiUrlService(
             OpenAIAsyncClient client,
-            @Value("${client-azureopenai-deployment-name}") String modelId
+            @Value("${client-azureopenai.deployment-name}") String modelId
     ) throws ServiceNotFoundException {
         super(client, modelId);
     }

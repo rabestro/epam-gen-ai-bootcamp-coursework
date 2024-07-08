@@ -12,7 +12,7 @@ public class BingService extends SemanticKernelBasicService {
 
     public BingService(
             OpenAIAsyncClient client,
-            @Value("${client-azureopenai-deployment-name}") String modelId
+            @Value("${client-azureopenai.deployment-name}") String modelId
     ) throws ServiceNotFoundException {
         super(client, modelId);
     }
