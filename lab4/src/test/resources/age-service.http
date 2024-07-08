@@ -1,6 +1,6 @@
 ### Calculate age from date
 
-POST {{host}}/api/age
+POST {{host}}/api/calculate-age
 Content-Type: application/json;charset=UTF-8
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json;charset=UTF-8
 
 ### Validate empty date
 
-POST {{host}}/api/age
+POST {{host}}/api/calculate-age
 Content-Type: application/json;charset=UTF-8
 
 {

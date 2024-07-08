@@ -1,29 +1,32 @@
 package com.epam.training.gen.ai.controller;
 
 import com.epam.training.gen.ai.model.ChatRequest;
-import com.epam.training.gen.ai.service.AiService;
+import com.epam.training.gen.ai.model.ChatResponse;
+import com.epam.training.gen.ai.semantic.kernel.KernelWikiSearchService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api")
 public class WiKiController {
-    private final AiService wikiUrlService;
+    private final KernelWikiSearchService wikiUrlService;
 
     @Autowired
-    public WiKiController(AiService wikiUrlService) {
+    public WiKiController(KernelWikiSearchService wikiUrlService) {
         this.wikiUrlService = wikiUrlService;
     }
 
-    @PostMapping(path = "/wiki")
-    public @ResponseBody List<String> getWikiUrl(@Valid @RequestBody ChatRequest request) {
-        return wikiUrlService.getChatCompletions(request.query());
+    @PostMapping(path = "/search-wiki")
+    public @ResponseBody ResponseEntity<ChatResponse> getWikiUrl(@Valid @RequestBody ChatRequest request) {
+        return wikiUrlService.getKernelFunctionalResponse(request.query())
+                .map(ChatResponse::new)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.unprocessableEntity().build());
     }
 }

@@ -1,6 +1,6 @@
 ### Get Wikipedia URL
 
-POST {{host}}/api/wiki
+POST {{host}}/api/search-wiki
 Content-Type: application/json;charset=UTF-8
 
 {

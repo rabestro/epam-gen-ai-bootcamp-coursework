@@ -1,6 +1,6 @@
 ### Get Bing Search URL
 
-POST {{host}}/api/bing
+POST {{host}}/api/search-bing
 Content-Type: application/json;charset=UTF-8
 
 {

@@ -3,7 +3,6 @@ package com.epam.training.gen.ai.config;
 import com.azure.ai.openai.OpenAIAsyncClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.core.credential.AzureKeyCredential;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
 import org.springframework.context.annotation.Bean;
@@ -38,10 +37,5 @@ public class OpenAIConfig {
         return Kernel.builder()
                 .withAIService(ChatCompletionService.class, chatCompletionService)
                 .build();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
     }
 }

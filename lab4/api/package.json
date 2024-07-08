@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "httpyac './tests/**/*.http' --all --env local --output short",
+    "test-age": "httpyac './tests/age-service-test.http' --all --env local --output short",
     "api-test": "httpyac ./tests/**/*.http --all --env local --no-color --junit > report.xml"
   },
   "keywords": [
