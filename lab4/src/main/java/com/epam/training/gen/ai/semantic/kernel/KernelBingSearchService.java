@@ -24,7 +24,7 @@ public class KernelBingSearchService extends AbstractKernelService {
 
     @Override
     protected KernelPlugin getPlugin() {
-        return KernelPluginFactory.createFromObject(new BingSearchUrlPlugin(), getPluginName());
+        return KernelPluginFactory.createFromObject(new BingSearchUrlPlugin(), getFunctionName());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class KernelBingSearchService extends AbstractKernelService {
     }
 
     @Override
-    protected String getPluginName() {
+    protected String getFunctionName() {
         return BING_SEARCH_URL_PLUGIN;
     }
 

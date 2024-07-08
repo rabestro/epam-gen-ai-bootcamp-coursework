@@ -24,7 +24,7 @@ public class KernelAgeCalculationService extends AbstractKernelService {
 
     @Override
     protected KernelPlugin getPlugin() {
-        return KernelPluginFactory.createFromObject(new AgeCalculatorPlugin(), getPluginName());
+        return KernelPluginFactory.createFromObject(new AgeCalculatorPlugin(), getFunctionName());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class KernelAgeCalculationService extends AbstractKernelService {
     }
 
     @Override
-    protected String getPluginName() {
+    protected String getFunctionName() {
         return AGE_TEMPLATE_PLUGIN;
     }
 

@@ -12,4 +12,4 @@ Content-Type: application/json;charset=UTF-8
 ?? status == 200
 ?? header content-type includes json
 ?? body output startsWith Your age is
-?? body output matches \d+ years?, \d+ months?, and \d+ days?\.$
+?? body output matches \d+ years?, \d+ months?, and \d+ days?

@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public abstract class AbstractKernelService {
+    private static final double TEMPERATURE = 0.2;
     private final OpenAIAsyncClient openAIAsyncClient;
     private final OpenAIProperties properties;
 
@@ -26,41 +27,41 @@ public abstract class AbstractKernelService {
 
     protected abstract String getPrompt();
 
-    protected abstract String getPluginName();
+    protected abstract String getFunctionName();
 
     protected abstract String getTemplate();
 
     public Optional<String> getKernelFunctionalResponse(String message) {
-        ChatCompletionService chatCompletionService = OpenAIChatCompletion.builder()
+        var chatCompletionService = OpenAIChatCompletion.builder()
                 .withModelId(properties.deploymentName())
                 .withOpenAIAsyncClient(openAIAsyncClient)
                 .build();
 
         KernelPlugin plugin = getPlugin();
 
-        Kernel kernel = Kernel.builder()
+        var kernel = Kernel.builder()
                 .withAIService(ChatCompletionService.class, chatCompletionService)
                 .withPlugin(plugin)
                 .build();
 
-        KernelFunction<String> getIntent = KernelFunction.<String>createFromPrompt(getPrompt())
+        var getIntent = KernelFunction.<String>createFromPrompt(getPrompt())
                 .withTemplateFormat("handlebars")
                 .build();
 
-        KernelFunctionArguments arguments = KernelFunctionArguments.builder()
+        var arguments = KernelFunctionArguments.builder()
                 .withVariable("system", getSystemPrompt())
                 .withVariable("request", message)
                 .build();
 
-        PromptExecutionSettings promptExecutionSettings = PromptExecutionSettings.builder()
-                .withTemperature(0.2)
+        var promptExecutionSettings = PromptExecutionSettings.builder()
+                .withTemperature(TEMPERATURE)
                 .build();
 
-        FunctionResult<String> block = kernel
+        var block = kernel
                 .invokeAsync(getIntent)
                 .withPromptExecutionSettings(promptExecutionSettings)
                 .withArguments(arguments)
-                .withToolCallBehavior(ToolCallBehavior.allowOnlyKernelFunctions(true, plugin.get(getPluginName())))
+                .withToolCallBehavior(ToolCallBehavior.allowOnlyKernelFunctions(true, plugin.get(getFunctionName())))
                 .block();
 
         return Optional.ofNullable(block)

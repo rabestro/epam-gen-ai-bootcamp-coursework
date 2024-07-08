@@ -11,3 +11,4 @@ Content-Type: application/json;charset=UTF-8
 
 ?? status == 200
 ?? header content-type includes json
+?? body output contains www.bing.com/search?q=

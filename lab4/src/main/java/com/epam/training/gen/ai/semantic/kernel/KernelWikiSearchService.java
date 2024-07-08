@@ -24,7 +24,7 @@ public class KernelWikiSearchService extends AbstractKernelService {
 
     @Override
     protected KernelPlugin getPlugin() {
-        return KernelPluginFactory.createFromObject(new WikiSearchUrlPlugin(), getPluginName());
+        return KernelPluginFactory.createFromObject(new WikiSearchUrlPlugin(), getFunctionName());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class KernelWikiSearchService extends AbstractKernelService {
     }
 
     @Override
-    protected String getPluginName() {
+    protected String getFunctionName() {
         return WIKIPEDIA_SEARCH_URL_PLUGIN;
     }
 
