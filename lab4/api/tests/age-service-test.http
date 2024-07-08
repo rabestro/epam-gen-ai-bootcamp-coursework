@@ -7,7 +7,7 @@ Accept: application/json
 Content-Type: application/json;charset=UTF-8
 
 {
-  "prompt": "The date is {{birthday}}"
+  "query": "The date is {{birthday}}"
 }
 
 ?? status == 200

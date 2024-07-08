@@ -4,5 +4,5 @@ POST {{host}}/api/wiki
 Content-Type: application/json;charset=UTF-8
 
 {
-  "prompt": "Query: Europe"
+  "query": "Query: Europe"
 }

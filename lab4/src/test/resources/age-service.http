@@ -4,5 +4,14 @@ POST {{host}}/api/age
 Content-Type: application/json;charset=UTF-8
 
 {
-  "prompt": "The date is 1978-07-28"
+  "query": "The date is 1978-07-28"
+}
+
+### Validate empty date
+
+POST {{host}}/api/age
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": ""
 }

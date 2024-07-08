@@ -1,7 +1,8 @@
 package com.epam.training.gen.ai.controller;
 
-import com.epam.training.gen.ai.dto.PromptRequest;
+import com.epam.training.gen.ai.model.ChatRequest;
 import com.epam.training.gen.ai.service.AiService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -24,7 +25,7 @@ public class AgeController {
     }
 
     @PostMapping(path = "/age", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<String> getAge(@RequestBody PromptRequest request) {
-        return ageService.getChatCompletions(request.prompt());
+    public @ResponseBody List<String> getAge(@RequestBody @Valid ChatRequest request) {
+        return ageService.getChatCompletions(request.query());
     }
 }

@@ -1,7 +1,8 @@
 package com.epam.training.gen.ai.controller;
 
-import com.epam.training.gen.ai.dto.PromptRequest;
+import com.epam.training.gen.ai.model.ChatRequest;
 import com.epam.training.gen.ai.service.AiService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class BingController {
     }
 
     @PostMapping(path = "/bing")
-    public @ResponseBody List<String> getBingUrl(@RequestBody PromptRequest request) {
-        return bingService.getChatCompletions(request.prompt());
+    public @ResponseBody List<String> getBingUrl(@RequestBody @Valid ChatRequest request) {
+        return bingService.getChatCompletions(request.query());
     }
 }

@@ -6,7 +6,7 @@ POST {{host}}/api/bing
 Content-Type: application/json;charset=UTF-8
 
 {
-  "prompt": "Query: {{query}}"
+  "query": "Query: {{query}}"
 }
 
 ?? status == 200

@@ -4,5 +4,5 @@ POST {{host}}/api/bing
 Content-Type: application/json;charset=UTF-8
 
 {
-  "prompt": "Query: Europe"
+  "query": "Query: Europe"
 }
