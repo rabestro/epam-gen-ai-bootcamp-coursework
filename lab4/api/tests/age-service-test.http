@@ -11,5 +11,32 @@ Content-Type: application/json;charset=UTF-8
 
 ?? status == 200
 ?? header content-type includes json
-?? body output startsWith Your age is
+?? body output contains age is
 ?? body output matches \d+ years?, \d+ months?, and \d+ days?
+
+### Response for an incorrect date
+POST {{host}}/api/calculate-age
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "The date is xxx"
+}
+
+?? status == 200
+?? header content-type includes json
+?? body output contains I'm sorry
+?? body output contains please provide
+?? body output matches date|details
+
+### Bad request with no query
+POST {{host}}/api/calculate-age
+Accept: application/json
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": ""
+}
+
+?? status == 400
+?? header content-type includes json
