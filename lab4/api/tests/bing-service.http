@@ -1,0 +1,14 @@
+@query = Europe
+
+### Get Bing Search URL
+
+POST {{host}}/api/search-bing
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "Query: {{query}}"
+}
+
+?? status == 200
+?? header content-type includes json
+?? body output contains www.bing.com/search?q=

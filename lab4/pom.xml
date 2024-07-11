@@ -8,6 +8,7 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.epam.training.gen.ai</groupId>
     <artifactId>gen_ai_training</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -15,44 +16,57 @@
     <description>gen_ai_training</description>
     <properties>
         <java.version>17</java.version>
+        <semantickernel.version>1.1.5</semantickernel.version>
+        <azure-ai-openai.version>1.0.0-beta.8</azure-ai-openai.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.microsoft.semantic-kernel</groupId>
+                <artifactId>semantickernel-bom</artifactId>
+                <version>${semantickernel.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>com.microsoft.semantic-kernel</groupId>
-            <artifactId>semantickernel-settings-loader</artifactId>
-            <version>0.2.13-alpha</version>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.semantic-kernel</groupId>
-            <artifactId>semantickernel-core</artifactId>
-            <version>0.2.13-alpha</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.microsoft.semantic-kernel</groupId>
             <artifactId>semantickernel-api</artifactId>
-            <version>1.0.0-rc2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.azure/azure-ai-openai -->
+        <dependency>
+            <groupId>com.microsoft.semantic-kernel</groupId>
+            <artifactId>semantickernel-aiservices-openai</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-ai-openai</artifactId>
-            <version>1.0.0-beta.7</version>
+            <version>${azure-ai-openai.version}</version>
         </dependency>
     </dependencies>
 
@@ -72,4 +86,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

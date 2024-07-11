@@ -1,0 +1,17 @@
+### Calculate age from date
+
+POST {{host}}/api/calculate-age
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "The date is 1978-07-28"
+}
+
+### Validate empty date
+
+POST {{host}}/api/calculate-age
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": ""
+}

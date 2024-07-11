@@ -1,0 +1,14 @@
+@query = Europe
+
+### Get Wikipedia URL
+
+POST {{host}}/api/search-wiki
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "Query: {{query}}"
+}
+
+?? status == 200
+?? header content-type includes json
+?? body output contains wikipedia.org/w/index.php?search=

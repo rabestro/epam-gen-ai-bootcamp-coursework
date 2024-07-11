@@ -1,0 +1,21 @@
+{
+  "name": "epam-gen-ai-bootcamp-coursework-module-4",
+  "version": "1.0.0",
+  "description": "Module 4. Project Organization",
+  "main": "index.js",
+  "scripts": {
+    "test": "httpyac './tests/**/*.http' --all --env local --output short",
+    "test-age": "httpyac './tests/age-service-test.http' --all --env local --output short",
+    "api-test": "httpyac ./tests/**/*.http --all --env local --no-color --junit > report.xml"
+  },
+  "keywords": [
+    "httpyac",
+    "api",
+    "ai-bootcamp"
+  ],
+  "author": "Jegors Čemisovs. <jegors_cemisovs@epam.com>",
+  "license": "MIT",
+  "dependencies": {
+    "httpyac": "^6.13.1"
+  }
+}

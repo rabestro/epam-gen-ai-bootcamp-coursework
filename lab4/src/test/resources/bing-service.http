@@ -1,0 +1,8 @@
+### Get Bing Search URL
+
+POST {{host}}/api/search-bing
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "Query: Europe"
+}
