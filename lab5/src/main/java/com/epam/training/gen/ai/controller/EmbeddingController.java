@@ -1,10 +1,11 @@
 package com.epam.training.gen.ai.controller;
 
-import com.epam.training.gen.ai.service.EmbeddingService;
+import com.epam.training.gen.ai.services.EmbeddingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.embedding.EmbeddingClient;
 import org.springframework.ai.embedding.EmbeddingResponse;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,12 +23,12 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 public class EmbeddingController {
-    private final EmbeddingModel embeddingModel;
+    private final EmbeddingClient embeddingClient;
     private final EmbeddingService embeddingService;
 
     @GetMapping("/ai/embedding")
     public Map<String, EmbeddingResponse> embed(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
-        var embeddingResponse = this.embeddingModel.embedForResponse(List.of(message));
+        var embeddingResponse = this.embeddingClient.embedForResponse(List.of(message));
         return Map.of("embedding", embeddingResponse);
     }
 
@@ -37,8 +38,22 @@ public class EmbeddingController {
     }
 
     @GetMapping("/ai/embedding/search")
-    public List<Document> search(@RequestParam(value = "message", defaultValue = "prompt engineering") String message) {
-        return this.embeddingService.getDocuments(message);
+    public List<List<Document>> search(
+            @RequestParam(value = "similarity", defaultValue = "0.0") Double similarity,
+            @RequestParam(value = "message", defaultValue = "prompt engineering") String message) {
+        var searchRequest = SearchRequest.query(message).withSimilarityThreshold(similarity);
+        var documents = embeddingService.getDocuments(searchRequest);
+        return List.of(documents);
+    }
+
+    @GetMapping("/ai/upload-embedding")
+    public List<Double> embedFile(@RequestParam("file") MultipartFile file) {
+        var uploadedFile = getUploadedFile(file);
+        try {
+            return embeddingService.embedDocument(uploadedFile);
+        } finally {
+            uploadedFile.delete();
+        }
     }
 
     @PostMapping("/ai/upload-embedding")
@@ -53,27 +68,30 @@ public class EmbeddingController {
 
     @GetMapping("/ai/dimensions")
     public int getDimensions() {
-        return embeddingModel.dimensions();
+        return embeddingClient.dimensions();
     }
 
     private File getUploadedFile(MultipartFile file) {
-        var fileName = file.getOriginalFilename();
-        var uploadPath = Paths.get("target", "uploads");
-
-        if (!Files.exists(uploadPath)) {
+        var directory = Paths.get("target/uploads");
+        if (!Files.exists(directory)) {
             try {
-                Files.createDirectories(uploadPath);
+                Files.createDirectories(directory);
             } catch (IOException e) {
-                throw new RuntimeException("Failed to create upload directory", e);
+                throw new RuntimeException("Failed to create directory: " + directory, e);
             }
         }
+        var fileName = file.getOriginalFilename();
+        var path = Paths.get("target", "uploads", fileName);
 
-        var filePath = uploadPath.resolve(fileName);
-        try {
-            Files.copy(file.getInputStream(), filePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to copy uploaded file", e);
+        if (path.toFile().exists()) {
+            path.toFile().delete();
         }
-        return filePath.toFile();
+        try {
+            Files.copy(file.getInputStream(), path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return path.toFile();
     }
+
 }

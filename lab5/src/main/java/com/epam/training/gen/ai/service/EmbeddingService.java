@@ -1,10 +1,12 @@
-package com.epam.training.gen.ai.service;
+package com.epam.training.gen.ai.services;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EmbeddingService {
-
     private final VectorStore vectorStore;
+    private final EmbeddingClient embeddingClient;
 
     public void addDocument(File file) {
         var document = convertPdfToDocument(file);
         vectorStore.add(List.of(document));
+    }
+
+    public List<Double> embedDocument(File file) {
+        var document = convertPdfToDocument(file);
+        return embeddingClient.embed(document);
     }
 
     public void addDocument(String text) {
@@ -29,6 +36,10 @@ public class EmbeddingService {
     }
 
     public List<Document> getDocuments(String searchText) {
+        return vectorStore.similaritySearch(searchText);
+    }
+
+    public List<Document> getDocuments(SearchRequest searchText) {
         return vectorStore.similaritySearch(searchText);
     }
 
@@ -43,4 +54,5 @@ public class EmbeddingService {
 
         return new Document(text);
     }
+
 }
