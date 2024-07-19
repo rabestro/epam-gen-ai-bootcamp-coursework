@@ -28,7 +28,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class RagService {
-
     private final EmbeddingStoreIngestor ingestor;
     private final AzureOpenAiEmbeddingModel embeddingModel;
     private final EmbeddingStore<TextSegment> embeddingStore;
@@ -45,9 +44,9 @@ public class RagService {
     }
 
     public String generateAnswer(String query) {
-        Embedding queryEmbedding = embeddingModel.embed(query).content();
-        StringBuilder context = getContext(queryEmbedding);
-        List<ChatMessage> messages = createMessages(query, context.toString());
+        var queryEmbedding = embeddingModel.embed(query).content();
+        var context = getContext(queryEmbedding);
+        var messages = createMessages(query, context.toString());
         return chatModel.generate(messages).content().text();
     }
 
@@ -60,7 +59,7 @@ public class RagService {
     }
 
     private StringBuilder getContext(Embedding queryEmbedding) {
-        EmbeddingSearchResult<TextSegment> relevantMatches = getRelevantMatches(queryEmbedding);
+        var relevantMatches = getRelevantMatches(queryEmbedding);
         StringBuilder context = new StringBuilder();
         for (EmbeddingMatch<TextSegment> match : relevantMatches.matches()) {
             context.append(match.embedded().text()).append("\n");
