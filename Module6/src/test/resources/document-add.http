@@ -11,7 +11,7 @@ Content-Type: application/pdf
 < ./Copilot-in-Power-Automate.pdf
 --WebAppBoundary
 
-### Load Document
+### Upload "Clean Design Developer"
 
 POST {{host}}/api/v1/documents
 Content-Type: multipart/form-data; boundary=WebAppBoundary

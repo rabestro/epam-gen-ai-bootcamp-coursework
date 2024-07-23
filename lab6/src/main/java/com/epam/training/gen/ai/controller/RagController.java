@@ -43,18 +43,18 @@ public class RagController {
 
     @PostMapping("/ai/query")
     public ResponseEntity<ChatResponse> query(@Valid @RequestBody ChatRequest chatRequest) {
-        String response = ragService.generateAnswer(chatRequest.query());
-        return new ResponseEntity<>(new ChatResponse(response), HttpStatus.OK);
+        var response = ragService.generateAnswer(chatRequest.query());
+        return ResponseEntity.ok(new ChatResponse(response));
     }
 
     private File getUploadedFile(MultipartFile file) {
-        Path uploadPath = getUploadPath();
-        Path filePath = copyUploadedFile(file, uploadPath);
+        var uploadPath = getUploadPath();
+        var filePath = copyUploadedFile(file, uploadPath);
         return filePath.toFile();
     }
 
     private Path getUploadPath() {
-        Path uploadPath = Paths.get("target", "uploads");
+        var uploadPath = Paths.get("target", "uploads");
 
         if (!Files.exists(uploadPath)) {
             try {
