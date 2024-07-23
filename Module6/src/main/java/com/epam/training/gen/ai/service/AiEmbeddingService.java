@@ -11,18 +11,18 @@ import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 @Service
 public class AiEmbeddingService implements EmbeddingService {
-    private static final int MAX_LENGTH = 7500;
-    private static final int SEARCH_START_OFFSET = 300;
     private final VectorStore vectorStore;
+    private final Function<String, List<String>> textSplitService;
 
-    public AiEmbeddingService(VectorStore vectorStore) {
+    public AiEmbeddingService(VectorStore vectorStore, Function<String, List<String>> textSplitService) {
         this.vectorStore = vectorStore;
+        this.textSplitService = textSplitService;
     }
 
     @Override
@@ -55,8 +55,8 @@ public class AiEmbeddingService implements EmbeddingService {
                                     pageText = pageText.replaceAll("\\s{2,}", " ");
 
                                     // If the text on one page exceeds 7500 characters, split it
-                                    if (pageText.length() > MAX_LENGTH) {
-                                        List<String> splitText = splitText(pageText);
+                                    if (pageText.length() > TextSplitService.MAX_LENGTH) {
+                                        List<String> splitText = textSplitService.apply(pageText);
                                         splitText.forEach(
                                                 text -> {
                                                     vectorStore.add(List.of(new Document(text)));
@@ -76,27 +76,5 @@ public class AiEmbeddingService implements EmbeddingService {
         }
 
         return true;
-    }
-
-    private List<String> splitText(String text) {
-        List<String> chunks = new ArrayList<>();
-        while (text.length() > MAX_LENGTH) {
-            int splitIndex = findSplitIndex(text);
-            chunks.add(text.substring(0, splitIndex));
-            text = text.substring(splitIndex);
-        }
-        chunks.add(text);
-        return chunks;
-    }
-
-    private int findSplitIndex(String text) {
-        for (int i = MAX_LENGTH - SEARCH_START_OFFSET; i < MAX_LENGTH; i++) {
-            if (isPunctuation(text.charAt(i))) return i;
-        }
-        return MAX_LENGTH;
-    }
-
-    private boolean isPunctuation(char c) {
-        return ".:;?!".indexOf(c) >= 0;
     }
 }
