@@ -1,7 +1,6 @@
 package com.epam.training.gen.ai.service;
 
 import org.apache.pdfbox.Loader;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
@@ -33,15 +32,14 @@ public class AiEmbeddingService implements EmbeddingService {
     @Override
     public List<Document> getDocumentsFromVectorDB(String searchText) {
         var searchRequest = SearchRequest.query(searchText);
-
         searchRequest.withTopK(2);
         searchRequest.withSimilarityThreshold(0.8);
         return vectorStore.similaritySearch(searchRequest);
     }
 
     private boolean addPDFDocumentToVectorDB(File pdfFile) {
-        try (PDDocument pdDocument = Loader.loadPDF(pdfFile)) {
-            PDFTextStripper textStripper = new PDFTextStripper();
+        try (var pdDocument = Loader.loadPDF(pdfFile)) {
+            var textStripper = new PDFTextStripper();
             int numberOfPages = pdDocument.getNumberOfPages();
             IntStream.rangeClosed(1, numberOfPages)
                     .forEach(
@@ -49,22 +47,19 @@ public class AiEmbeddingService implements EmbeddingService {
                                 try {
                                     textStripper.setStartPage(pageNumber);
                                     textStripper.setEndPage(pageNumber);
-                                    String pageText = textStripper.getText(pdDocument);
+                                    var pageText = textStripper.getText(pdDocument);
                                     // Replace newline characters with whitespace
                                     pageText = pageText.replace("\n", " ");
                                     pageText = pageText.replaceAll("\\s{2,}", " ");
 
                                     // If the text on one page exceeds 7500 characters, split it
                                     if (pageText.length() > TextSplitService.MAX_LENGTH) {
-                                        List<String> splitText = textSplitService.apply(pageText);
-                                        splitText.forEach(
-                                                text -> {
-                                                    vectorStore.add(List.of(new Document(text)));
-                                                });
-                                    } else {
-                                        if (StringUtils.hasText(pageText)) {
-                                            vectorStore.add(List.of(new Document(pageText)));
-                                        }
+                                        textSplitService.apply(pageText).stream()
+                                                .map(Document::new)
+                                                .map(List::of)
+                                                .forEach(vectorStore::add);
+                                    } else if (StringUtils.hasText(pageText)) {
+                                        vectorStore.add(List.of(new Document(pageText)));
                                     }
 
                                 } catch (IOException e) {

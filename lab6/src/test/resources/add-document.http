@@ -12,7 +12,6 @@ Content-Type: application/pdf
 --WebAppBoundary
 
 ### Upload "Clean Design Developer"
-
 POST {{host}}/api/v1/documents
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
@@ -21,4 +20,15 @@ Content-Disposition: form-data; name="file"; filename="Clean-Design-Developer.pd
 Content-Type: application/pdf
 
 < ./Clean-Design-Developer.pdf
+--WebAppBoundary
+
+### Upload "Welcome to Java Technologies"
+POST {{host}}/api/v1/documents
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="java-technologies-unit.pdf"
+Content-Type: application/pdf
+
+< ./java-technologies-unit.pdf
 --WebAppBoundary
