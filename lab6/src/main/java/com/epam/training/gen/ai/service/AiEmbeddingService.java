@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 public class AiEmbeddingService implements EmbeddingService {
@@ -30,11 +31,11 @@ public class AiEmbeddingService implements EmbeddingService {
     }
 
     @Override
-    public List<Document> getDocumentsFromVectorDB(String searchText) {
+    public Stream<Document> getDocumentsFromVectorDB(String searchText) {
         var searchRequest = SearchRequest.query(searchText);
         searchRequest.withTopK(2);
         searchRequest.withSimilarityThreshold(0.8);
-        return vectorStore.similaritySearch(searchRequest);
+        return vectorStore.similaritySearch(searchRequest).stream();
     }
 
     private boolean addPDFDocumentToVectorDB(File pdfFile) {
@@ -47,10 +48,10 @@ public class AiEmbeddingService implements EmbeddingService {
                                 try {
                                     textStripper.setStartPage(pageNumber);
                                     textStripper.setEndPage(pageNumber);
-                                    var pageText = textStripper.getText(pdDocument);
-                                    // Replace newline characters with whitespace
-                                    pageText = pageText.replace("\n", " ");
-                                    pageText = pageText.replaceAll("\\s{2,}", " ");
+                                    var pageText = textStripper
+                                            .getText(pdDocument)
+                                            .replace("\n", " ")
+                                            .replaceAll("\\s{2,}", " ");
 
                                     // If the text on one page exceeds 7500 characters, split it
                                     if (pageText.length() > TextSplitService.MAX_LENGTH) {

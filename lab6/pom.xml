@@ -5,21 +5,73 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>3.3.1</version>
         <relativePath/>
     </parent>
-
     <groupId>com.epam.training.gen.ai</groupId>
     <artifactId>Module6</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>RAG</description>
+    <name>
+        Module 6. Retrieval-Augmented Generation
+    </name>
+    <description>
+        This project is a part of the GenAI Foundations for Java Developers course.
+        It implements a Retrieval-Augmented Generation (RAG) application that uses a PDF document as a knowledge source.
+        The application allows users to upload new documents and generate text based on the uploaded knowledge sources.
+        The generated text is relevant and accurate based on the knowledge sources.
+    </description>
+    <url>
+        https://github.com/rabestro/epam-gen-ai-bootcamp-coursework
+    </url>
+    <inceptionYear>
+        2024
+    </inceptionYear>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>EPAM Systems</name>
+        <url>https://www.epam.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>rabestro</id>
+            <name>Jegors Čemisovs</name>
+            <email>jegors_cemisovs@epam.com</email>
+            <url>https://www.linkedin.com/in/jegors-cemisovs</url>
+            <timezone>Europe/Riga</timezone>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>st4sik</id>
+            <name>Stanislav Riabokon</name>
+            <email>stanislav_riabokon@epam.com</email>
+            <url>https://github.com/st4sik</url>
+            <roles>
+                <role>mentor</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/rabestro/epam-gen-ai-bootcamp-coursework/issues</url>
+    </issueManagement>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <spring-ai.version>1.0.0.M1</spring-ai.version>
         <semantickernel.version>1.1.5</semantickernel.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,8 +120,8 @@
             <artifactId>semantickernel-aiservices-openai</artifactId>
             <version>${semantickernel.version}</version>
         </dependency>
-
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -98,6 +150,7 @@
             </plugin>
         </plugins>
     </build>
+
     <repositories>
         <repository>
             <id>spring-milestones</id>
@@ -108,6 +161,5 @@
             </snapshots>
         </repository>
     </repositories>
-
 
 </project>

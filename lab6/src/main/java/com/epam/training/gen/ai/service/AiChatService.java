@@ -23,7 +23,7 @@ public class AiChatService implements Function<String, Optional<String>> {
     @Override
     public Optional<String> apply(String question) {
         var context = embeddingService
-                .getDocumentsFromVectorDB(question).stream()
+                .getDocumentsFromVectorDB(question)
                 .map(Document::getContent)
                 .collect(Collectors.joining());
 
