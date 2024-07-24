@@ -1,4 +1,4 @@
-package com.epam.training.gen.ai.service;
+package com.epam.training.gen.ai.service.text;
 
 import org.springframework.stereotype.Service;
 

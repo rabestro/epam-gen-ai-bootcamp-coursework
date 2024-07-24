@@ -9,13 +9,13 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 @Service
-public class SearchService implements Function<String, Stream<Document>> {
+public class AiSearchService implements Function<String, Stream<Document>> {
     private static final int TOP_K = 2;
     private static final double SIMILARITY_THRESHOLD = 0.8;
 
     private final VectorStore vectorStore;
 
-    public SearchService(VectorStore vectorStore) {
+    public AiSearchService(VectorStore vectorStore) {
         this.vectorStore = vectorStore;
     }
 
