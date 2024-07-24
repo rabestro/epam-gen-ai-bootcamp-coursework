@@ -3,11 +3,11 @@ package com.epam.training.gen.ai.service;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 @Service
-public class TextSplitService implements Function<String, List<String>> {
+public class TextSplitService implements Function<String, Stream<String>> {
     public static final int MAX_LENGTH = 7500;
     public static final int SEARCH_START_OFFSET = 300;
 
@@ -23,14 +23,16 @@ public class TextSplitService implements Function<String, List<String>> {
     }
 
     @Override
-    public List<String> apply(String text) {
+    public Stream<String> apply(String text) {
         var chunks = new ArrayList<String>();
         while (text.length() > MAX_LENGTH) {
             int splitIndex = findSplitIndex(text);
             chunks.add(text.substring(0, splitIndex));
             text = text.substring(splitIndex);
         }
-        chunks.add(text);
-        return chunks;
+        if (!text.isBlank()) {
+            chunks.add(text);
+        }
+        return chunks.stream();
     }
 }

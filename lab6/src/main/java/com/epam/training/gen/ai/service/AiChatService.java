@@ -9,21 +9,22 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class AiChatService implements Function<String, Optional<String>> {
-    private final EmbeddingService embeddingService;
+    private final Function<String, Stream<Document>> searchService;
     private final Kernel kernel;
 
-    public AiChatService(EmbeddingService embeddingService, Kernel kernel) {
-        this.embeddingService = embeddingService;
+    public AiChatService(Function<String, Stream<Document>> searchService, Kernel kernel) {
+        this.searchService = searchService;
         this.kernel = kernel;
     }
 
     @Override
     public Optional<String> apply(String question) {
-        var context = embeddingService
-                .getDocumentsFromVectorDB(question)
+        var context = searchService
+                .apply(question)
                 .map(Document::getContent)
                 .collect(Collectors.joining());
 

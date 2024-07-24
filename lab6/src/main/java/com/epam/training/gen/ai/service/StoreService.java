@@ -3,6 +3,7 @@ package com.epam.training.gen.ai.service;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +13,7 @@ import java.util.function.Consumer;
 
 @Service
 public class StoreService implements Consumer<MultipartFile> {
-    private final EmbeddingService embeddingService;
+    private final Consumer<File> embeddingService;
     private final Path uploadPath;
 
     {
@@ -27,7 +28,7 @@ public class StoreService implements Consumer<MultipartFile> {
         }
     }
 
-    public StoreService(EmbeddingService embeddingService) {
+    public StoreService(Consumer<File> embeddingService) {
         this.embeddingService = embeddingService;
     }
 
@@ -47,7 +48,7 @@ public class StoreService implements Consumer<MultipartFile> {
                 .orElseThrow();
         saveToPath(multipartFile, filePath);
         var uploadedFile = filePath.toFile();
-        embeddingService.addDocumentToVectorDB(uploadedFile);
+        embeddingService.accept(uploadedFile);
         uploadedFile.delete();
     }
 }
