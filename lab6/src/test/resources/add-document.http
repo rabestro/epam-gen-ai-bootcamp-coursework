@@ -1,0 +1,34 @@
+@host = http://127.0.0.1:8043
+
+### Upload "Copilot in Power Automate"
+POST {{host}}/api/v1/documents
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="Copilot-in-Power-Automate.pdf"
+Content-Type: application/pdf
+
+< ./Copilot-in-Power-Automate.pdf
+--WebAppBoundary
+
+### Upload "Clean Design Developer"
+POST {{host}}/api/v1/documents
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="Clean-Design-Developer.pdf"
+Content-Type: application/pdf
+
+< ./Clean-Design-Developer.pdf
+--WebAppBoundary
+
+### Upload "Welcome to Java Technologies"
+POST {{host}}/api/v1/documents
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="java-technologies-unit.pdf"
+Content-Type: application/pdf
+
+< ./java-technologies-unit.pdf
+--WebAppBoundary
