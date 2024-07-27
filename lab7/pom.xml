@@ -15,7 +15,11 @@
         Module 7. Spring AI
     </name>
     <description>
-        Module 7. Spring AI
+        This project is a part of the GenAI Foundations for Java Developers course, specifically Module 7.
+        It focuses on the use of Spring AI to create an interactive Chat Service with a system prompt
+        and a Document Reader Service that can read and analyze PDF documents. The application also includes
+        vector database support for storing and retrieving embeddings. The goal is to provide a deeper
+        understanding of how to use Spring AI to handle complex tasks and create interactive services.
     </description>
     <url>
         https://github.com/rabestro/epam-gen-ai-bootcamp-coursework

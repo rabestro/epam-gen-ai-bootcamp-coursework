@@ -1,4 +1,4 @@
-package com.epam.lab7.documentreader;
+package com.epam.lab7.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

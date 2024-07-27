@@ -9,10 +9,22 @@ Content-Type: application/pdf
 < ./EPAM_Corporate_Overview_Q4_EOY.pdf
 --WebAppBoundary
 
-### EPAM Company Overview
+### How many EPAMers
 # Expected: There are 53,150+ EPAMers in the company.
-
 POST {{host}}/api/v1/documents/query
 Content-Type: application/txt
 
 How many EPAMers are there in the company?
+
+### The CEO of EPAM
+# Expected: The CEO of EPAM is Arkadiy Dobkin.
+POST {{host}}/api/v1/documents/query
+Content-Type: application/txt
+
+Who is the CEO of EPAM?
+
+### The executive leaders of EPAM
+POST {{host}}/api/v1/documents/query
+Content-Type: application/txt
+
+Who are the executive leaders of EPAM?
