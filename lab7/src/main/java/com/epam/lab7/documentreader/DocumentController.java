@@ -10,17 +10,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+import static java.util.function.Predicate.not;
+
 @RestController
-@RequestMapping("/documents")
+@RequestMapping("/api/v1/documents")
 @RequiredArgsConstructor
 public class DocumentController {
     private final DocumentService documentService;
 
-    @PostMapping("/upload")
+    @PostMapping
     public void uploadFiles(@RequestParam("files") List<MultipartFile> files) {
         files.stream()
-                .filter(file -> !file.isEmpty())
-                .forEach(this::processFile);
+                .filter(not(MultipartFile::isEmpty))
+                .forEach(documentService::addDocument);
     }
 
     @PostMapping("/query")
@@ -28,7 +30,4 @@ public class DocumentController {
         return documentService.queryDocument(query);
     }
 
-    private void processFile(MultipartFile uploadedFile) {
-            documentService.addDocument(uploadedFile);
-    }
 }

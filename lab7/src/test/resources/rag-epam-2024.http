@@ -1,5 +1,18 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get$END$
-    ?generated-in=IntelliJ IDEA
+### Upload "EPAM Company Overview. February 2024"
+POST {{host}}/api/v1/documents
+Content-Type: multipart/form-data; boundary=WebAppBoundary
 
-###
+--WebAppBoundary
+Content-Disposition: form-data; name="files"; filename="EPAM_Corporate_Overview_Q4_EOY.pdf"
+Content-Type: application/pdf
+
+< ./EPAM_Corporate_Overview_Q4_EOY.pdf
+--WebAppBoundary
+
+### EPAM Company Overview
+# Expected: There are 53,150+ EPAMers in the company.
+
+POST {{host}}/api/v1/documents/query
+Content-Type: application/txt
+
+How many EPAMers are there in the company?
