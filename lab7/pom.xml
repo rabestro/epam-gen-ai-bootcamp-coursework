@@ -5,27 +5,70 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>3.3.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.epam</groupId>
     <artifactId>lab7</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>lab7</name>
-    <description>lab7</description>
+    <name>
+        Module 7. Spring AI
+    </name>
+    <description>
+        Module 7. Spring AI
+    </description>
+    <url>
+        https://github.com/rabestro/epam-gen-ai-bootcamp-coursework
+    </url>
+    <inceptionYear>
+        2024
+    </inceptionYear>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>EPAM Systems</name>
+        <url>https://www.epam.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>rabestro</id>
+            <name>Jegors Čemisovs</name>
+            <email>jegors_cemisovs@epam.com</email>
+            <url>https://www.linkedin.com/in/jegors-cemisovs</url>
+            <timezone>Europe/Riga</timezone>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>iliya-potapovich-ukg</id>
+            <name>Iliya Potapovich</name>
+            <email>iliya_potapovich@epam.com</email>
+            <url>https://www.linkedin.com/in/iliya-potapovich-b923a11aa</url>
+            <roles>
+                <role>mentor</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/rabestro/epam-gen-ai-bootcamp-coursework/issues</url>
+    </issueManagement>
+
     <properties>
         <java.version>21</java.version>
-        <spring-ai.version>0.8.1</spring-ai.version>
+        <spring-ai.version>1.0.0-M1</spring-ai.version>
     </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-batch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -35,35 +78,18 @@
             <artifactId>spring-ai-azure-openai-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-pgvector-store-spring-boot-starter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-pdf-document-reader</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.retry</groupId>
-            <artifactId>spring-retry</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-        </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.batch</groupId>
-            <artifactId>spring-batch-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -84,6 +110,7 @@
             </plugin>
         </plugins>
     </build>
+
     <repositories>
         <repository>
             <id>spring-milestones</id>
