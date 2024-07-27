@@ -1,4 +1,4 @@
-package com.epam.lab7.v1.common;
+package com.epam.lab7.documentreader;
 
 public final class DocumentSearchSystemPrompt {
     public static final String SYSTEM_PROMPT = """

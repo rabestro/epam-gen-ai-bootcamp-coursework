@@ -1,4 +1,4 @@
-package com.epam.lab7.v1.controller;
+package com.epam.lab7.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;

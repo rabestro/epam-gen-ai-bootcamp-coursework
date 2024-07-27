@@ -1,4 +1,4 @@
-package com.epam.lab7.v1.documentreader;
+package com.epam.lab7.documentreader;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
