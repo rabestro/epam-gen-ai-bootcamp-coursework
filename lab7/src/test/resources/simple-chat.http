@@ -1,0 +1,33 @@
+### Tell me a dad joke about Dog
+GET {{host}}/api/v1/chat
+
+### Tell me a dad joke about Cat
+GET {{host}}/api/v1/chat?message="Tell me a dad joke about Cat"
+
+### Tell me a joke about {topic}
+GET {{host}}/api/v1/jokes-by-topic?topic="Dog"
+
+### Tell me a joke about {topic}
+GET {{host}}/api/v1/jokes-by-topic
+
+### Tell me a joke about Dog
+GET {{host}}/api/v1/chat-with-response?message="Tell me a joke about Dog"
+
+### Tell me a joke about computers
+GET {{host}}/api/v1/chat-with-response
+
+### Tell me a joke about computers
+GET {{host}}/api/v1/chat-with-history
+
+### Tell me a joke about waiters
+GET {{host}}/api/v1/chat-with-history?message="about waiters"
+
+### Copilot in Power Automate
+# Expected: 93% of Fortune 500 companies use Power Automate
+
+POST {{host}}/api/v1/chat
+Content-Type: application/json
+
+{
+  "question": "How many of Fortune 500 companies use Power Automate?"
+}
