@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/youtube")
-public class YouTube {
+public class YouTubeController {
     private final ChatClient chatClient;
     @Value("classpath:/prompts/youtube.txt")
     private Resource ytPromptResource;
 
-    public YouTube(ChatClient.Builder builder) {
+    public YouTubeController(ChatClient.Builder builder) {
         this.chatClient = builder.build();
     }
 
