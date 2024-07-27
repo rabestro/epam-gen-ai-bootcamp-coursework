@@ -1,4 +1,4 @@
-package com.epam.lab7.v1.chat;
+package com.epam.lab7.documentreader;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.vectorstore.VectorStore;
