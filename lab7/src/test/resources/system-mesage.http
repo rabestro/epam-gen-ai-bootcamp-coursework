@@ -1,5 +1,2 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get$END$
-    ?generated-in=IntelliJ IDEA
-
-###
+### Respond to inquiries about pirate treasure
+GET {{host}}/api/v1/treasure
