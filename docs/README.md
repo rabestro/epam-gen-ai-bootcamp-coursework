@@ -19,10 +19,6 @@ The primary objective of this course is to provide hands-on experience in creati
 
 - `Lab1`: A simple Spring Boot application that uses Semantic Kernel to generate text.
 
-## How to Run
-
-TODO: Provide instructions on how to run your projects.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
