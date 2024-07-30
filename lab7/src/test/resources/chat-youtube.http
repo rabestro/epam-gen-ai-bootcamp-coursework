@@ -1,0 +1,8 @@
+### The most popular YouTubers
+GET {{host}}/api/v1/youtube/popular
+
+### The ten most popular YouTubers for music lovers
+GET {{host}}/api/v1/youtube/popular-resource?genre="music"
+
+### The ten most popular YouTubers for Java developers
+GET {{host}}/api/v1/youtube/popular-resource?genre="Java"

@@ -1,0 +1,2 @@
+### Respond to inquiries about pirate treasure
+GET {{host}}/api/v1/treasure
